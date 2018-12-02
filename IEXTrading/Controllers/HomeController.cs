@@ -97,6 +97,45 @@ namespace MVCTemplate.Controllers
             //return PartialView("_symbolDropdown",companies);
         }
 
+        public JsonResult addStockToProfile(string symbol, string profileName)
+        {
+
+            ViewBag.dbSucessComp = 0;
+            IEXHandler webHandler = new IEXHandler();
+            List<Company> companyList = new List<Company>();
+            companyList.Add(new Company { symbol = symbol });
+            ProfileStock profileStock = new ProfileStock();
+            profileStock.profileName = profileName;
+            profileStock.symbol = symbol;
+            //Database will give PK constraint violation error when trying to insert record with existing PK.
+            //So add company only if it doesnt exist, check existence using symbol (PK)
+            int status = 0;
+            if (dbContext.ProfileStocks.Where(c => c.symbol.Equals(profileStock.symbol) && c.profileName.Equals(profileStock.profileName)).Count() == 0)
+            {
+                dbContext.ProfileStocks.Add(profileStock);
+                status = 1;
+            }
+
+            dbContext.SaveChanges();
+            ViewBag.dbSuccessComp = 1;
+
+            return Json(status);
+        }
+
+        public List<Quote> GetQuotes(List<Company> symbols)
+        {
+            //Set ViewBag variable first
+            ViewBag.dbSucessComp = 0;
+            IEXHandler webHandler = new IEXHandler();
+            List<Quote> quotes = webHandler.GetQuotes(symbols).ToList();
+
+            //Save comapnies in TempData
+            //TempData["Quotes"] = JsonConvert.SerializeObject(quotes.Take(5));
+            //List<CompanyStrategyValue> quotes = webHandler.GetQuotes(companies);
+
+            return quotes;
+        }
+
         public IActionResult Quotes()
         {
             //Set ViewBag variable first

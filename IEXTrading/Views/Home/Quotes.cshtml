@@ -1,0 +1,109 @@
+﻿@model IEnumerable<IEXTrading.Models.Quote>
+
+@{
+    ViewData["Title"] = "Quotes";
+}
+
+<h2>Showing first 5 symbol's quotes</h2>
+<a asp-controller="Home" asp-action="ShowTop5Stock">Top 5 52-Week Price Range Strategy Picks</a>
+
+<table>
+    <thead>
+        <tr>
+            <td>
+                companyName
+            </td>
+            <td>
+                primaryExchange
+            </td>
+            <td>
+                sector
+            </td>
+            <td>
+                open
+            </td>
+            <td>
+                close
+            </td>
+            <td>
+                high
+            </td>
+            <td>
+                low
+            </td>
+            <td>
+                latestPrice
+            </td>
+            <td>
+                latestVolume
+            </td>
+            <td>
+                previousClose
+            </td>
+            <td>
+                marketCap
+            </td>
+            <td>
+                week52High
+            </td>
+            <td>
+                week52Low
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.companyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.primaryExchange)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sector)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.open)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.close)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.high)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.low)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.latestPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.latestVolume)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.previousClose)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.marketCap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.week52High)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.week52Low)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <a id="dbopt" asp-controller="Home" asp-action="PopulateQuotes"><img src="~/images/button_save-data.png" /></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    alertDbSave(@ViewBag.dbSuccessComp);
+</script>

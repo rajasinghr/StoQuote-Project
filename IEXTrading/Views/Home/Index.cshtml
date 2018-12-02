@@ -1,0 +1,168 @@
+﻿@model IEnumerable<IEXTrading.Models.Quote>
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>StoQuote WatchList</h2>
+<hr />
+<div>
+    <div>
+        <label>Choose a profile to view: </label>
+        <select id="profileDropDown" style="width:100px;" class="js-example-basic-single" name="profile">
+            
+            @foreach (var m in (IEnumerable<string>)ViewData["profiles"])
+            {
+                <option value="@m">@m</option>
+            }
+        </select>
+    </div>
+    <br />
+    <br />
+    
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Company Name
+                </th>
+                <th>
+                    Primary Exchange
+                </th>
+                <th>
+                    Sector
+                </th>
+                <th>
+                    Open
+                </th>
+                <th>
+                    Close
+                </th>
+                <th>
+                    High
+                </th>
+                <th>
+                    Low
+                </th>
+                <th>
+                    Latest Price
+                </th>
+                <th>
+                    Latest Volume
+                </th>
+                <th>
+                    Previous Close
+                </th>
+                <th>
+                    Market Cap
+                </th>
+                <th>
+                    Week52 High
+                </th>
+                <th>
+                    Week52 Low
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.companyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.primaryExchange)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sector)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.open)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.close)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.high)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.low)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.latestPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.latestVolume)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.previousClose)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.marketCap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.week52High)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.week52Low)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+</div>
+<script>
+    $(document).ready(function () {
+        $("#profileDropDown").select2({
+            placeholder: "Select a Profile"
+        });
+
+        $("#profileDropDown").change(function () {
+            var profileName = $('#profileDropDown').find('option:selected').val();
+            
+            //var url = "/home/IndexAlt?profileName='" + profileName + "'";
+            //window.location.href = url;
+
+            $.ajax({
+
+                url: '/home/GetProfileQuotes',
+                type: 'GET',
+                data: {
+                    'profileName': profileName
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $('table tbody').empty();
+                    html = ''
+                    
+                    for (i = 0; i < data.length; i++) {
+                        html += '<tr>';
+                        html += '<td>' + data[i].companyName + '</td>'
+                        html += '<td>' + data[i].primaryExchange + '</td>'
+                        html += '<td>' + data[i].sector + '</td>'
+                        html += '<td>' + data[i].open + '</td>'
+                        html += '<td>' + data[i].close + '</td>'
+                        html += '<td>' + data[i].high + '</td>'
+                        html += '<td>' + data[i].low + '</td>'
+                        html += '<td>' + data[i].latestPrice + '</td>'
+                        html += '<td>' + data[i].latestVolume + '</td>'
+                        html += '<td>' + data[i].previousClose + '</td>'
+                        html += '<td>' + data[i].marketCap + '</td>'
+                        html += '<td>' + data[i].week52High + '</td>'
+                        html += '<td>' + data[i].week52Low + '</td>'
+                        html += '</tr>';
+                    }
+                    $('table tbody').append(html);
+                },
+                error: function (request, error) {
+                    alert("Request: " + JSON.stringify(request));
+                }
+            });
+        })
+    });
+</script>

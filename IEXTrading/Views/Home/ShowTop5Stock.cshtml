@@ -1,0 +1,96 @@
+﻿@model IEnumerable<IEXTrading.Models.StockWithValue>
+
+@{
+    ViewData["Title"] = "ShowTop5Stock";
+}
+
+<h2>Top 5 52-Week Price Range Strategy Picks</h2>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Symbol
+            </th>
+            <th>
+                Week 52 Strategy value
+            </th>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Primary Exchange
+            </th>
+            <th>
+                Sector
+            </th>
+            <th>
+                Calculation Price
+            </th>
+            <th>
+                Open
+            </th>
+            <th>
+                Close
+            </th>
+            <th>
+                High
+            </th>
+            <th>
+                Low
+            </th>
+            <th>
+                Latest Price
+            </th>
+            <th>
+                Week 52 High
+            </th>
+            <th>
+                Week 52 Low
+            </th>
+            
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.symbol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.week52Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.companyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.primaryExchange)
+            <td>
+                @Html.DisplayFor(modelItem => item.sector)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.calculationPrice)
+            <td>
+                @Html.DisplayFor(modelItem => item.open)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.close)
+            <td>
+                @Html.DisplayFor(modelItem => item.high)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.low)
+            <td>
+                @Html.DisplayFor(modelItem => item.week52High)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.week52Low)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

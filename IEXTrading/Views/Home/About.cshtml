@@ -6,7 +6,7 @@
 <link href="~/css/index.css" rel="stylesheet" />
 
 <div class="article-section">
-    <h1>Assignment 4 - Stock picking strategy Website</h1>
+    <h1>Final Project - StoQuote</h1>
     <br />
     <table class="rankingTable">
         <tr>
@@ -35,15 +35,40 @@
     </div>
     <div class="">
         <ul>
-            <li><a asp-area="" asp-controller="Home" asp-action="Quotes">Quotes </a></li>
-            <li><a asp-controller="Home" asp-action="ShowTop5Stock">Top 5 52-Week Price Range Strategy Picks</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index"><label style="font-size:14px">Stock Watch List</label></a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Symbols"><label style="font-size:14px">Stock Profile </label></a></li>
+            <li><a asp-controller="Home" asp-action="ShowTop5Stock"><label style="font-size:14px">Top 5 52-Week Price Range Strategy Picks</label></a></li>
         </ul>
     </div>
     <br />
     <hr />
     <div class="title">
-        <label class="label-text">Database Augmentation</label>
-        <p>In database augmentation, we connected our application to the Azure DB. We created a table called Quotes and we will be able to save data in that table.</p>
+        <label class="label-text">Application Overview</label>
+        <p style="font-size:14px">In StoQuote, we enhanced the assignment 4 by adding a Stock monitoring page. We connected our application to the Azure DB and published this application in Azure.</p>
+        <div>
+            <p style="font-size:14px">
+                This application let's you fetch trading data from IEX via their public <a href="https://iextrading.com/developer/">API</a>.
+                <br />
+                The <a asp-area="" asp-controller="Home" asp-action="Symbols">Stock Profile</a> tab allows you to create user specific profile to watch the stocks. Symbols data are fetched from the
+                <a href="https://iextrading.com/developer/docs/#reference-data">IEX Reference API </a> and displays the results in a drop down.
+                This data can also be saved in the Azure database.
+                <br />
+                The <a asp-area="" asp-controller="Home" asp-action="ShowTop5Stock">Top 5 Picks</a> tab let's you see the top 5 stocks based on Week 52 Strategy. This fetches quotes from
+                <a href="https://iextrading.com/developer/docs/#stocks">IEX Stock API</a>.
+                The quote can also be saved in the Azure database.
+                <br />
+                The <a asp-area="" asp-controller="Home" asp-action="Chart">View StoQuote Chart</a> tab helps you to visualize the price ranges of companies for the period of one year.
+            </p>
+            <p style="font-size:14px">
+                Following learning objectives are fulfilled -
+                <ul>
+                    <li style="font-size:14px">Connection to REST API.</li>
+                    <li style="font-size:14px">Connection to Azure database.</li>
+                    <li style="font-size:14px">CRUD operations.</li>
+                    <li style="font-size:14px">Deploy application in Azure.</li>
+                </ul>
+            </p>
+        </div>
     </div>
     <br />
     <hr />
@@ -51,10 +76,10 @@
         <label class="label-text">Stock Picking Strategy</label>
         <br />
         <label class="desc-text">
-            The 52-week Price strategy is based on a stock's price momentum. As far as stocks are concerned, momentum means the spead at which the stock varies (going up or down). Stocks which are considered to be risky may go higher and higher, whereas stocks which are low or less risky may go even lower.
+            The 52-week Price strategy is based on a stock's price momentum. As far as stocks are concerned, momentum means the speed at which the stock varies (going up or down). Stocks which are considered to be risky may go higher and higher, whereas stocks which are low or less risky may go even lower.
             <br />
             One of the simpler ways to measure the momentum of the price is to find out how close the stock is to the 52-week high or low. The formula which was used for this is :
-            (Close-week52Low)/Week52High-Week52Low)
+            (Close-week52Low)/(Week52High-Week52Low)
 
         </label>
     </div>
@@ -63,54 +88,46 @@
     <div>
         <label class="label-text">Self Reflection Points</label>
         <br />
-        <p>
+        <p style="font-size:14px">
             According to Raja Singh Ravi:
             <br />
-            <i>“In this assignment, I have designed the controller and view for the application. Also, I worked on the part where we have to make the controller communicate with the views. I learned how this communication works in an MVC application. Also, I got to know about the importance of tempdata.”</i>
+            <i>
+                “In this project, I have designed the home page which shows the stocks based on user profile.
+                Also, I worked on the part where we have to return JSONResult from controller and display the results using JQuery.
+                Ajax calls are written to make Asynchronous data retrieval and to improve response time. I learned how this communication works in an MVC application. Also, I got to know about the importance of ViewData.
+                ”
+            </i>
         </p>
     </div>
     <br />
     <hr />
     <div>
-        <p>
+        <p style="font-size:14px">
             According to Vigneshwar Sripad:
             <br />
-            <i>“I found the stock trading application very helpful, in such a way that it gave me a better understanding of the MVC architecture. Also, this is the second assignment in which I had made use of Git. Hence, I was able to get an even better understanding of how the Git repository works. As far as this application is concerned, I worked on the IEXTrading APIs and made batch calls to pull Stock Quotes for all the symbols. Read IEXTrading Developer documnetation to understand about the data and datatypes.”</i>
+            <i>
+                “I found the stock trading application very helpful, in such a way that it gave me a better understanding of the MVC architecture.
+                Also, I was able to get an even better understanding of how the Git repository works from this project.
+                As far as this project is concerned, I worked on creating the Stock profile models and table in Azure DB. I wrote code to save profile stocks data in table.
+                Read IEXTrading Developer documentation to understand about the data and datatypes.”
+            </i>
         </p>
     </div>
     <br />
     <hr />
     <div>
-        <p>
+        <p style="font-size:14px">
             According to Azeem Syed:
             <br />
-            <i>“I had gone through the document which had  been posted as part of the assignment and went through the links which had been provided. After going through these links, I got an idea regarding the stock picking strategies. The strategy which I had picked for stock-picking was the 52 week strategy. This is the strategy which we have implemented in the code. Using this strategy, we wrote code to pick the best 5 stocks from the total.”</i>
+            <i>
+                “The strategy which I had picked for stock-picking was the 52 week strategy.
+                This is the strategy which we have implemented in the code. Using this strategy, we wrote code to pick the best 5 stocks from the total.
+                Also, I worked on developing a page for Maintaining stock profiles. This page allows us to create new profile and stocks to watch.
+                I worte HTML views and CSS for designing this page.”
+            </i>
         </p>
     </div>
     <br />
-
-    <p>
-        This application let's you fetch trading data from IEX via their public <a href="https://iextrading.com/developer/">API</a>.
-        <br />
-        <br />
-        The <a asp-area="" asp-controller="Home" asp-action="Symbols">Symbols</a> tab fetches symbols data from the
-        <a href="https://iextrading.com/developer/docs/#reference-data">IEX Reference API </a> and displays the results.
-        This data can also be saved in the local database.
-        <br />
-        The <a asp-area="" asp-controller="Home" asp-action="Quote">Quote</a> tab let's you select a Company(symbol) and fetches a quote from
-        <a href="https://iextrading.com/developer/docs/#stocks">IEX Stock API</a>.
-        The quote can also be saved in the local database.
-        <br />
-        The <a asp-area="" asp-controller="Home" asp-action="Refresh">Refresh</a> tab let's you refresh the local database, that is, remove all its contents.
-    </p>
-    <p>
-        Following learning objectives are fulfilled -
-        <ul>
-            <li>Connection to REST API.</li>
-            <li>Connection to database.</li>
-            <li>CRUD operations.</li>
-        </ul>
-    </p>
 
 
 </div>
